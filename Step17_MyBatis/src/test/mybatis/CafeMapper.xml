@@ -30,9 +30,13 @@
 	
 	<select id="getData" parameterType="int" 
 		resultType="cafeDto">
-		SELECT <include refid="cafeColumn"/>
-		FROM board_cafe
-		WHERE num=#{num}	
+		SELECT result1.*
+		FROM ( SELECT <include refid="cafeColumn"/>,
+				LAG(num, 1, 0) OVER(ORDER BY num DESC) prevNum,
+				LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum
+			 FROM board_cafe
+			 ORDER BY num DESC ) result1
+		WHERE num=#{num}			
 	</select>
 	
 	<delete id="delete" parameterType="int">

@@ -106,7 +106,17 @@
 			</c:otherwise>
 		</c:choose>		
 	</ul>
-	
+	<!-- keyword 검색어 form -->
+	<form action="list.do" method="post">
+		<label for="condition">검색조건</label>
+		<select name="condition" id="condition">
+			<option value="titlecontent">제목+내용</option>
+			<option value="title">제목</option>
+			<option value="writer">작성자</option>
+		</select>
+		<input type="text" name="keyword" placeholder="검색어..." />
+		<button type="submit">검색</button>
+	</form>	
 </div>
 <script>
 	//삭제 확인을 하는 함수 
@@ -117,11 +127,9 @@
 		}
 	}
 </script>
-
-
-
-
-
-
 </body>
 </html>
+
+
+
+

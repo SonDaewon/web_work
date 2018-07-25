@@ -18,6 +18,14 @@
 </style>
 </head>
 <body>
+<div>
+	<c:if test="${dto.prevNum ne 0}">
+		<a href="detail.do?num=${dto.prevNum }">이전글</a> |
+	</c:if>
+	<c:if test="${dto.nextNum ne 0}">
+		<a href="detail.do?num=${dto.nextNum }">다음글</a>
+	</c:if>
+</div>
 <h3>글 자세히 보기 페이지</h3>
 <c:if test="${sessionScope.id eq dto.writer }">
 	<a href="private/updateform.do?num=${dto.num }">수정</a>
