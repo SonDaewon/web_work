@@ -45,6 +45,9 @@ public class CafeListAction extends Action{
 			}else if(condition.equals("writer")) {//작성자 검색
 				dto.setWriter(keyword);
 			}
+			//list.jsp 에서 필요한 내용 담기
+			request.setAttribute("condition", condition);
+			request.setAttribute("keyword", keyword);
 		}
 		
 		//보여줄 페이지의 번호
@@ -89,7 +92,8 @@ public class CafeListAction extends Action{
 		request.setAttribute("startPageNum", startPageNum);
 		request.setAttribute("endPageNum", endPageNum);
 		request.setAttribute("totalPageCount", totalPageCount);
-				
+		// 전체 row 의 갯수도 전달하기
+		request.setAttribute("totalRow", totalRow);
 		return new ActionForward("/views/cafe/list.jsp");
 	}
 

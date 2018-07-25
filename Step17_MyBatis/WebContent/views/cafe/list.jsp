@@ -51,7 +51,7 @@
 			<tr>
 				<td>${tmp.num }</td>
 				<td>${tmp.writer }</td>
-				<td><a href="detail.do?num=${tmp.num }">${tmp.title }</a></td>
+				<td><a href="detail.do?num=${tmp.num }&condition=${condition}&keyword=${keyword}">${tmp.title }</a></td>
 				<td>${tmp.viewCount }</td>
 				<td>${tmp.regdate }</td>
 				<td>
@@ -69,7 +69,7 @@
 		<c:choose>
 			<c:when test="${startPageNum ne 1 }">
 				<li>
-					<a href="list.do?pageNum=${startPageNum-1 }">&laquo;</a>
+					<a href="list.do?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${keyword}">&laquo;</a>
 				</li>
 			</c:when>
 			<c:otherwise>
@@ -83,12 +83,12 @@
 			<c:choose>
 				<c:when test="${i eq pageNum }">
 					<li class="active">
-						<a href="list.do?pageNum=${i }">${i }</a>
+						<a href="list.do?pageNum=${i }&condition=${condition}&keyword=${keyword}">${i }</a>
 					</li>
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a href="list.do?pageNum=${i }">${i }</a>
+						<a href="list.do?pageNum=${i }&condition=${condition}&keyword=${keyword}">${i }</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
@@ -96,7 +96,7 @@
 		<c:choose>
 			<c:when test="${endPageNum lt totalPageCount }">
 				<li>
-					<a href="list.do?pageNum=${endPageNum+1 }">&raquo;</a>
+					<a href="list.do?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${keyword}">&raquo;</a>
 				</li>
 			</c:when>
 			<c:otherwise>
@@ -110,13 +110,22 @@
 	<form action="list.do" method="post">
 		<label for="condition">검색조건</label>
 		<select name="condition" id="condition">
-			<option value="titlecontent">제목+내용</option>
-			<option value="title">제목</option>
-			<option value="writer">작성자</option>
+			<option value="titlecontent" <c:if test="${condition eq 'titlecontent' }">selected</c:if>>제목+내용</option>
+			<option value="title" <c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
+			<option value="writer" <c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
 		</select>
-		<input type="text" name="keyword" placeholder="검색어..." />
+		<input value="${keyword }" type="text" name="keyword" placeholder="검색어..." />
 		<button type="submit">검색</button>
-	</form>	
+	</form>
+	<c:choose>
+		<c:when test="${not empty keyword }">
+			<p><strong>${keyword }</strong> 검색어로 검색된 
+			<strong>${totalRow }</strong>개의 글이 있습니다.</p>
+		</c:when>
+		<c:otherwise>
+			<p><strong>${totalRow }</strong>개의 글이 있습니다.</p>
+		</c:otherwise>
+	</c:choose>	
 </div>
 <script>
 	//삭제 확인을 하는 함수 

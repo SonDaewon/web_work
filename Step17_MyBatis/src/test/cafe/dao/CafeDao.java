@@ -73,18 +73,18 @@ public class CafeDao {
 		return list;
 	}
 	//글 하나의 정보를 리턴하는 메소드 
-	public CafeDto getData(int num) {
+	public CafeDto getData(CafeDto dto) {
 		SqlSession session=null;
-		CafeDto dto=null;
+		CafeDto resultDto=null;
 		try {
 			session=factory.openSession();
-			dto=session.selectOne("cafe.getData", num);
+			resultDto=session.selectOne("cafe.getData", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			session.close();
 		}
-		return dto;
+		return resultDto;
 	}
 	//글정보를 삭제하는 메소드
 	public boolean delete(int num) {

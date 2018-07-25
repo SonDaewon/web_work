@@ -18,12 +18,15 @@
 </style>
 </head>
 <body>
+<c:if test="${not empty keyword }">
+	<p> 검색어 : <strong>${keyword }</strong> 에 대한 자세히 보기</p>
+</c:if>
 <div>
 	<c:if test="${dto.prevNum ne 0}">
-		<a href="detail.do?num=${dto.prevNum }">이전글</a> |
+		<a href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${keyword}">이전글</a> |
 	</c:if>
 	<c:if test="${dto.nextNum ne 0}">
-		<a href="detail.do?num=${dto.nextNum }">다음글</a>
+		<a href="detail.do?num=${dto.nextNum }&condition=${condition}&keyword=${keyword}">다음글</a>
 	</c:if>
 </div>
 <h3>글 자세히 보기 페이지</h3>
