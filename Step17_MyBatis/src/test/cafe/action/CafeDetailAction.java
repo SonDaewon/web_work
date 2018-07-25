@@ -18,6 +18,9 @@ public class CafeDetailAction extends Action{
 		int num=Integer.parseInt(request.getParameter("num"));
 		//2. CafeDao 를 이용해서 글정보를 읽어와서
 		CafeDto dto=CafeDao.getInstance().getData(num);
+		// 글 조회수 올리기
+		CafeDao.getInstance().addViewCount(num);
+	
 		//3. request 에 담고
 		request.setAttribute("dto", dto);
 		//4. view 페이지로 forward 이동해서 응답 

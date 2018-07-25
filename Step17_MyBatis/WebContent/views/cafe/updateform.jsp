@@ -12,6 +12,7 @@
 <body>
 <h3>카페 글 수정 페이지 입니다.</h3>
 <form action="update.do" method="post">
+	<input type="hidden" name="num" value="${dto.num }" />
 	<label for="writer">작성자</label>
 	<input type="text" id="writer" 
 		value="${dto.writer }" disabled="disabled"/><br/>

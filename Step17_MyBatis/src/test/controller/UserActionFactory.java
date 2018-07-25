@@ -6,6 +6,7 @@ import test.cafe.action.CafeDetailAction;
 import test.cafe.action.CafeInsertAction;
 import test.cafe.action.CafeInsertformAction;
 import test.cafe.action.CafeListAction;
+import test.cafe.action.CafeUpdateAction;
 import test.cafe.action.CafeUpdateformAction;
 import test.file.action.FileDeleteAction;
 import test.file.action.FileDownloadAction;
@@ -108,6 +109,8 @@ public class UserActionFactory {
 			action=new CafeDeleteAction();
 		}else if(command.equals("/cafe/private/updateform")) {
 			action=new CafeUpdateformAction();
+		}else if(command.equals("/cafe/private/update")) {
+			action=new CafeUpdateAction();
 		}
 		
 		return action;

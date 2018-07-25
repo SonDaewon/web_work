@@ -104,6 +104,36 @@ public class CafeDao {
 			return false;
 		}
 	}
+	//글정보 수정하는 메소드 
+	public boolean update(CafeDto dto) {
+		SqlSession session = null;
+		int flag = 0;
+		try {
+			session = factory.openSession(true);
+			flag=session.update("cafe.update", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	//조회수를 증가 시키는 메소드
+	public void addViewCount(int num) {
+		SqlSession session = null;
+		try {
+			session = factory.openSession(true);
+			session.update("cafe.addViewCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
 }
 
 
