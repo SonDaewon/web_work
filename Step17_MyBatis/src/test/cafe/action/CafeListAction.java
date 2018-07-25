@@ -22,6 +22,31 @@ public class CafeListAction extends Action{
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		/*
+		 *  request 에 검색 keyword 가 전달 될수도 있고 안될수도 있다.
+		 *  1. 전달 안되는 경우 : home 에서 목록보기를 누른경우
+		 *  2. 전달 되는 경우 : list.do 에서 검색어를 입력후 form 전송한
+		 *     경우. 
+		 *  3. 전달 되는 경우 : 이미 검색을 한 상태에서 페이지 링크를 
+		 *     누른경우
+		 */
+		//검색과 관련된 파라미터를 읽어와 본다.
+		String keyword=request.getParameter("keyword");
+		String condition=request.getParameter("condition");		
+		
+		//CafeDto 객체를 생성해서 
+		CafeDto dto=new CafeDto();
+		if(keyword != null) {//검색어가 전달된 경우 
+			if(condition.equals("titlecontent")) {//제목+내용 검색
+				dto.setTitle(keyword);
+				dto.setContent(keyword);
+			}else if(condition.equals("title")) {//제목 검색
+				dto.setTitle(keyword);
+			}else if(condition.equals("writer")) {//작성자 검색
+				dto.setWriter(keyword);
+			}
+		}
+		
 		//보여줄 페이지의 번호
 		int pageNum=1;
 		//보여줄 페이지의 번호가 파라미터로 전달되는지 읽어온다.
@@ -36,7 +61,7 @@ public class CafeListAction extends Action{
 		int endRowNum=pageNum*PAGE_ROW_COUNT;
 		
 		//전체 row 의 갯수를 읽어온다.
-		int totalRow=CafeDao.getInstance().getCount();
+		int totalRow=CafeDao.getInstance().getCount(dto);
 		//전체 페이지의 갯수 구하기
 		int totalPageCount=
 				(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
@@ -50,8 +75,7 @@ public class CafeListAction extends Action{
 			endPageNum=totalPageCount; //보정해준다. 
 		}
 		
-		// startRowNum 과 endRowNum을 FileDto 에 담은 다음 
-		CafeDto dto=new CafeDto();
+		// 위에서 만든 CafeDto 에 추가 정보를 담는다. 
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
 		

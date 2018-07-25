@@ -41,12 +41,12 @@ public class CafeDao {
 		}
 	}
 	//글의 갯수를 리턴하는 메소드 
-	public int getCount() {
+	public int getCount(CafeDto dto) {
 		SqlSession session=null;
 		int count=0;
 		try {
 			session=factory.openSession();
-			count=session.selectOne("cafe.getCount");
+			count=session.selectOne("cafe.getCount", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
