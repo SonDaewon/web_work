@@ -13,6 +13,8 @@
 		VALUES(board_cafe_seq.NEXTVAL, #{writer}, #{title},
 			#{content}, #{viewCount}, SYSDATE)
 	</insert>
+	
+	
 	<select id="getCount" parameterType="cafeDto" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM board_cafe
@@ -28,6 +30,7 @@
 			</if>
 		</where>
 	</select>
+	
 	<select id="getList" parameterType="cafeDto"
 		resultType="cafeDto">
 		SELECT *

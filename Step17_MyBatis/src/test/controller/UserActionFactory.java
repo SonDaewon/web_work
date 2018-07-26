@@ -1,6 +1,7 @@
 package test.controller;
 
 import test.action.HomeAction;
+import test.cafe.action.CafeCommentInsertAction;
 import test.cafe.action.CafeDeleteAction;
 import test.cafe.action.CafeDetailAction;
 import test.cafe.action.CafeInsertAction;
@@ -111,6 +112,8 @@ public class UserActionFactory {
 			action=new CafeUpdateformAction();
 		}else if(command.equals("/cafe/private/update")) {
 			action=new CafeUpdateAction();
+		}else if(command.equals("/cafe/comment_insert")) {
+			action=new CafeCommentInsertAction();
 		}
 		
 		return action;

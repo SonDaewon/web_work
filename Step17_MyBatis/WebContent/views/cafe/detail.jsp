@@ -58,8 +58,61 @@
 </table>
 <div class="content">${dto.content }</div>
 <a href="list.do">목록 보기</a>
+<!-- 댓글에 관련된 UI -->
+<div class="comments">
+	<c:forEach var="tmp" items="${commentList }">
+		<div class="comment">
+		
+		</div>
+	</c:forEach>
+	<!-- 원글에 댓글을 작성할수 있는 폼 -->
+	<div class="comment_form">
+		<form action="comment_insert.do" method="post">
+			<input type="hidden" name="writer" 
+				value="${id }" />
+			<input type="hidden" name="ref_group" 
+				value="${dto.num }"/>
+			<input type="hidden" name="target_id" 
+				value="${dto.writer }"/>
+			<textarea name="content"></textarea>
+			<button type="submit">등록</button>
+		</form>
+	</div>
+</div>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
+<script>
+	//로그인 했는지 여부
+	var isLogin=${isLogin};
+	
+	//댓글 전송 이벤트가 일어 났을때 실행할 함수 등록
+	$(".comment_form > form").submit(function(){
+		if(!isLogin){//로그인 하지 않았으면
+			var isGoLogin=confirm("로그인이 필요 합니다.");
+			if(isGoLogin){
+				//로그인 페이지로 이동하기
+				location.href="${pageContext.request.contextPath}"+
+					"/users/loginform.do"+
+					"?url=${pageContext.request.contextPath}"+
+					"/cafe/detail.do?num=${dto.num}";
+			}
+			return false;//폼 전송 막기 
+		}
+	});
+	
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

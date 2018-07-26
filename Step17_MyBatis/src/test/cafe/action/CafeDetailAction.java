@@ -45,6 +45,14 @@ public class CafeDetailAction extends Action{
 	
 		//3. request 에 담고
 		request.setAttribute("dto", resultDto);
+		//로그인 여부 확인해서  request 에 담기 
+		String id=(String)request.getSession().getAttribute("id");
+		boolean isLogin=false;
+		if(id!=null) {
+			isLogin=true;
+		}
+		request.setAttribute("isLogin", isLogin);
+		
 		//4. view 페이지로 forward 이동해서 응답 
 		return new ActionForward("/views/cafe/detail.jsp");
 	}
