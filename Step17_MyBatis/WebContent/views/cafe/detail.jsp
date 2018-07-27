@@ -62,7 +62,12 @@
 <div class="comments">
 	<c:forEach var="tmp" items="${commentList }">
 		<div class="comment">
-		
+			<img src="${pageContext.request.contextPath }/resources/images/user_image.gif"/>
+			<span>${tmp.writer }</span>
+			<span>${tmp.regdate }</span>
+			<a href="">답글</a>|
+			<a href="">신고</a>
+			<p>${tmp.content }</p>
 		</div>
 	</c:forEach>
 	<!-- 원글에 댓글을 작성할수 있는 폼 -->

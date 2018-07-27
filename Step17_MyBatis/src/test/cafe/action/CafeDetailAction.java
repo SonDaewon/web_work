@@ -1,9 +1,13 @@
 package test.cafe.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import test.cafe.dao.CafeCommentDao;
 import test.cafe.dao.CafeDao;
+import test.cafe.dto.CafeCommentDto;
 import test.cafe.dto.CafeDto;
 import test.controller.Action;
 import test.controller.ActionForward;
@@ -51,7 +55,12 @@ public class CafeDetailAction extends Action{
 		if(id!=null) {
 			isLogin=true;
 		}
+		// 로그인 여부 
 		request.setAttribute("isLogin", isLogin);
+		// 댓글 목록
+		List<CafeCommentDto> commentList=
+				CafeCommentDao.getInstance().getList(num);
+		request.setAttribute("commentList", commentList);
 		
 		//4. view 페이지로 forward 이동해서 응답 
 		return new ActionForward("/views/cafe/detail.jsp");
