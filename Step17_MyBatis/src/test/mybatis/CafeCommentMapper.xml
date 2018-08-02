@@ -17,7 +17,8 @@
 	<select id="getList" parameterType="int"
 		resultType="commentDto">
 		SELECT num, writer, content, target_id, ref_group, 
-			comment_group, regdate
+			comment_group, 
+			TO_CHAR(regdate,'YYYY.MM.DD HH24:MI') regdate
 		FROM board_cafe_comment
 		WHERE ref_group=#{num}
 		ORDER BY comment_group ASC, num ASC			
